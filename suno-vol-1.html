@@ -66,13 +66,34 @@
       line-height: 1.15;
       margin-bottom: 36px;
     }
+    .stage-embed {
+      position: relative;
+    }
     .stage-embed iframe {
-      display: block;
+      display: none;
       width: 100%;
       height: 152px;
       border: none;
       border-radius: 2px;
     }
+    .stage-embed iframe.active {
+      display: block;
+    }
+    .embed-loader {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      pointer-events: none;
+      opacity: 1;
+      transition: opacity 0.3s;
+    }
+    .embed-loader.hidden { opacity: 0; }
     .stage-nav {
       display: flex;
       align-items: center;
@@ -197,9 +218,7 @@
     <div class="stage">
       <div class="stage-label" id="stage-num"></div>
       <div class="stage-title" id="stage-title"></div>
-      <div class="stage-embed">
-        <iframe id="player" allow="autoplay"></iframe>
-      </div>
+      <div class="stage-embed" id="stage-embed"></div>
       <div class="stage-nav">
         <button class="nav-btn" id="prev-btn">← prev</button>
         <span class="stage-counter" id="stage-counter"></span>
@@ -216,32 +235,56 @@
 
   <script>
     var tracks = [
-      { id: "ba52be65-3f40-4ca3-94b7-b3d26416e808", title: "Wilyer's House of Bombs" },
+      { id: "09b1bf02-ed12-4e3e-a5aa-f4e794798edf", title: "Vanilla Teal" },
       { id: "e7c2766b-6f8d-4219-8471-5d7ab500bab5", title: "Open Hands Tonight" },
       { id: "d5ad9c9d-d20d-466c-8482-f2cf9bcfdaf7", title: "Open Hands Yesterday" },
       { id: "a026258b-7d53-4d51-947d-aa41ac51f959", title: "Open Palm Drive" },
       { id: "e6b94108-6867-4e37-bc37-ed97f1a6251e", title: "Eightfold Path Progressive House" },
       { id: "51615056-e8b0-4f00-b31f-b679ee26249c", title: "Eightfold" },
-      { id: "09b1bf02-ed12-4e3e-a5aa-f4e794798edf", title: "Vanilla Teal" },
+      { id: "ba52be65-3f40-4ca3-94b7-b3d26416e808", title: "Wilyer's House of Bombs" },
     ];
 
     var currentIdx = 0;
-    var player = document.getElementById('player');
     var stageNum = document.getElementById('stage-num');
     var stageTitle = document.getElementById('stage-title');
     var stageCounter = document.getElementById('stage-counter');
     var prevBtn = document.getElementById('prev-btn');
     var nextBtn = document.getElementById('next-btn');
     var setlistEl = document.getElementById('setlist');
+    var stageEmbedEl = document.getElementById('stage-embed');
     var countEl = document.getElementById('track-count');
     var wrapper = document.getElementById('player-wrap');
 
     countEl.textContent = tracks.length + ' track' + (tracks.length !== 1 ? 's' : '');
 
+    // Loading indicator sits on top of whichever iframe is active
+    var loader = document.createElement('div');
+    loader.className = 'embed-loader hidden';
+    loader.textContent = 'loading';
+    stageEmbedEl.appendChild(loader);
+
+    // Create one persistent iframe per track — no src yet
+    var iframes = tracks.map(function() {
+      var iframe = document.createElement('iframe');
+      iframe.allow = 'autoplay';
+      stageEmbedEl.insertBefore(iframe, loader);
+      return { el: iframe, loaded: false };
+    });
+
+    function loadTrack(idx) {
+      var t = iframes[idx];
+      if (t.loaded || t.el.src) return;
+      t.el.src = 'https://suno.com/embed/' + tracks[idx].id;
+      t.el.addEventListener('load', function() {
+        t.loaded = true;
+        if (currentIdx === idx) loader.classList.add('hidden');
+      }, { once: true });
+    }
+
+    // Build setlist
     tracks.forEach(function(track, i) {
       var item = document.createElement('div');
       item.className = 'setlist-item';
-      item.dataset.index = i;
       var num = String(i + 1).padStart(2, '0');
       var numEl = document.createElement('div');
       numEl.className = 'setlist-num';
@@ -257,24 +300,36 @@
 
     function goTo(idx) {
       currentIdx = idx;
-      var track = tracks[idx];
       var total = tracks.length;
       var num = String(idx + 1).padStart(2, '0');
-      var totalStr = String(total).padStart(2, '0');
 
       stageNum.textContent = 'Track ' + num;
-      stageTitle.textContent = track.title;
-      stageCounter.textContent = num + ' — ' + totalStr;
-      player.src = 'https://suno.com/embed/' + track.id;
+      stageTitle.textContent = tracks[idx].title;
+      stageCounter.textContent = num + ' — ' + String(total).padStart(2, '0');
 
       prevBtn.disabled = idx === 0;
       nextBtn.disabled = idx === total - 1;
 
-      var items = setlistEl.querySelectorAll('.setlist-item');
-      items.forEach(function(el, i) {
-        el.classList.toggle('active', i === idx);
+      // Show active iframe, hide others
+      iframes.forEach(function(t, i) {
+        t.el.classList.toggle('active', i === idx);
       });
 
+      // Show loader only if this track hasn't finished loading yet
+      if (!iframes[idx].loaded) {
+        loader.classList.remove('hidden');
+      } else {
+        loader.classList.add('hidden');
+      }
+
+      // Load current track, then preload neighbors
+      loadTrack(idx);
+      if (idx + 1 < total) loadTrack(idx + 1);
+      if (idx - 1 >= 0) loadTrack(idx - 1);
+
+      // Highlight setlist
+      var items = setlistEl.querySelectorAll('.setlist-item');
+      items.forEach(function(el, i) { el.classList.toggle('active', i === idx); });
       var activeItem = items[idx];
       if (activeItem) activeItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
