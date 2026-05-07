@@ -37,65 +37,137 @@
     }
     .ep-count { font-size: 11px; color: var(--muted); letter-spacing: 0.1em; white-space: nowrap; }
 
-    .tracks-wrap {
-      padding: 48px 40px 80px;
+    /* ── player layout ── */
+    .player-wrap {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2px;
+      grid-template-columns: 280px 1fr;
+      min-height: calc(100vh - 89px - 65px);
     }
 
-    .track-card {
-      border: 1px solid var(--border);
-      background: var(--bg2);
-      padding: 28px 28px 24px;
-    }
-
-    @media (max-width: 640px) {
-      .tracks-wrap {
-        grid-template-columns: 1fr;
-        padding: 16px 16px 60px;
-      }
-      .track-card { padding: 20px 16px 18px; }
-    }
-
-    .track-header {
+    /* ── stage ── */
+    .stage {
+      padding: 52px 52px 44px;
+      border-left: 1px solid var(--border);
       display: flex;
-      align-items: baseline;
-      gap: 16px;
-      margin-bottom: 18px;
+      flex-direction: column;
     }
-    .track-num {
+    .stage-label {
       font-size: 10px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--accent);
-      flex-shrink: 0;
+      margin-bottom: 14px;
     }
-    .track-title {
+    .stage-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 22px;
+      font-size: 44px;
       font-weight: 300;
       color: var(--white);
-      line-height: 1.2;
+      line-height: 1.15;
+      margin-bottom: 36px;
     }
-
-    .track-embed {
-      width: 100%;
-      margin-bottom: 16px;
-    }
-    .track-embed iframe {
+    .stage-embed iframe {
       display: block;
       width: 100%;
       height: 152px;
       border: none;
       border-radius: 2px;
     }
-
-    .track-desc {
+    .stage-nav {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      margin-top: 28px;
+    }
+    .nav-btn {
+      font-family: 'Geist Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: color 0.2s;
+    }
+    .nav-btn:hover:not(:disabled) { color: var(--white); }
+    .nav-btn:disabled { opacity: 0.2; cursor: default; }
+    .stage-counter {
       font-size: 11px;
       color: var(--muted);
-      letter-spacing: 0.08em;
-      line-height: 1.7;
+      letter-spacing: 0.12em;
+    }
+    .stage-hint {
+      margin-top: auto;
+      padding-top: 40px;
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      opacity: 0.5;
+    }
+
+    /* ── setlist ── */
+    .setlist {
+      overflow-y: auto;
+      border-right: 1px solid var(--border);
+    }
+    .setlist-header {
+      padding: 18px 24px 14px;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+    }
+    .setlist-item {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .setlist-item:hover { background: var(--bg2); }
+    .setlist-item.active { background: var(--bg2); }
+    .setlist-num {
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      flex-shrink: 0;
+      transition: color 0.2s;
+    }
+    .setlist-item.active .setlist-num { color: var(--accent); }
+    .setlist-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      font-weight: 300;
+      color: var(--text);
+      line-height: 1.3;
+      transition: color 0.2s;
+    }
+    .setlist-item.active .setlist-name { color: var(--white); }
+
+    /* ── mobile ── */
+    @media (max-width: 640px) {
+      header { padding: 20px; flex-wrap: wrap; gap: 10px; }
+      .ep-title { font-size: 18px; }
+      .player-wrap {
+        display: flex;
+        flex-direction: column;
+        min-height: auto;
+      }
+      .setlist { order: 1; border-right: none; border-top: 1px solid var(--border); }
+      .stage {
+        order: 0;
+        padding: 28px 20px 24px;
+        border-left: none;
+        border-bottom: none;
+      }
+      .stage-title { font-size: 32px; margin-bottom: 24px; }
+      .stage-hint { display: none; }
+      .setlist-item { padding: 16px 20px; }
     }
 
     footer {
@@ -105,8 +177,6 @@
     footer span { font-size: 11px; color: var(--muted); letter-spacing: 0.1em; }
 
     @media (max-width: 540px) {
-      header { padding: 20px; flex-wrap: wrap; gap: 10px; }
-      .ep-title { font-size: 18px; }
       footer { padding: 20px; }
     }
   </style>
@@ -120,7 +190,24 @@
     <div class="ep-count" id="track-count"></div>
   </header>
 
-  <div class="tracks-wrap" id="tracks"></div>
+  <div class="player-wrap" id="player-wrap" tabindex="-1">
+    <div class="setlist" id="setlist">
+      <div class="setlist-header">Tracklist</div>
+    </div>
+    <div class="stage">
+      <div class="stage-label" id="stage-num"></div>
+      <div class="stage-title" id="stage-title"></div>
+      <div class="stage-embed">
+        <iframe id="player" allow="autoplay"></iframe>
+      </div>
+      <div class="stage-nav">
+        <button class="nav-btn" id="prev-btn">← prev</button>
+        <span class="stage-counter" id="stage-counter"></span>
+        <button class="nav-btn" id="next-btn">next →</button>
+      </div>
+      <div class="stage-hint">← → keys navigate (click prev/next to re-arm after using the player)</div>
+    </div>
+  </div>
 
   <footer>
     <span><a href="index.html" style="color:inherit;text-decoration:none;">justinfu.com</a></span>
@@ -128,8 +215,6 @@
   </footer>
 
   <script>
-    // To add a song: get the song ID from the Suno URL (suno.com/song/SONG_ID)
-    // then paste it as the id below. title and desc are optional.
     var tracks = [
       { id: "ba52be65-3f40-4ca3-94b7-b3d26416e808", title: "Wilyer's House of Bombs" },
       { id: "e7c2766b-6f8d-4219-8471-5d7ab500bab5", title: "Open Hands Tonight" },
@@ -140,29 +225,77 @@
       { id: "09b1bf02-ed12-4e3e-a5aa-f4e794798edf", title: "Vanilla Teal" },
     ];
 
-    var container = document.getElementById('tracks');
+    var currentIdx = 0;
+    var player = document.getElementById('player');
+    var stageNum = document.getElementById('stage-num');
+    var stageTitle = document.getElementById('stage-title');
+    var stageCounter = document.getElementById('stage-counter');
+    var prevBtn = document.getElementById('prev-btn');
+    var nextBtn = document.getElementById('next-btn');
+    var setlistEl = document.getElementById('setlist');
     var countEl = document.getElementById('track-count');
+    var wrapper = document.getElementById('player-wrap');
+
     countEl.textContent = tracks.length + ' track' + (tracks.length !== 1 ? 's' : '');
 
     tracks.forEach(function(track, i) {
-      var card = document.createElement('div');
-      card.className = 'track-card';
-
+      var item = document.createElement('div');
+      item.className = 'setlist-item';
+      item.dataset.index = i;
       var num = String(i + 1).padStart(2, '0');
-      var embedSrc = 'https://suno.com/embed/' + track.id;
-
-      card.innerHTML =
-        '<div class="track-header">' +
-          '<div class="track-num">Track ' + num + '</div>' +
-          '<div class="track-title">' + track.title + '</div>' +
-        '</div>' +
-        '<div class="track-embed">' +
-          '<iframe src="' + embedSrc + '" allow="autoplay" loading="lazy"></iframe>' +
-        '</div>' +
-        (track.desc ? '<div class="track-desc">' + track.desc + '</div>' : '');
-
-      container.appendChild(card);
+      var numEl = document.createElement('div');
+      numEl.className = 'setlist-num';
+      numEl.textContent = num;
+      var nameEl = document.createElement('div');
+      nameEl.className = 'setlist-name';
+      nameEl.textContent = track.title;
+      item.appendChild(numEl);
+      item.appendChild(nameEl);
+      item.addEventListener('click', function() { goTo(i); });
+      setlistEl.appendChild(item);
     });
+
+    function goTo(idx) {
+      currentIdx = idx;
+      var track = tracks[idx];
+      var total = tracks.length;
+      var num = String(idx + 1).padStart(2, '0');
+      var totalStr = String(total).padStart(2, '0');
+
+      stageNum.textContent = 'Track ' + num;
+      stageTitle.textContent = track.title;
+      stageCounter.textContent = num + ' — ' + totalStr;
+      player.src = 'https://suno.com/embed/' + track.id;
+
+      prevBtn.disabled = idx === 0;
+      nextBtn.disabled = idx === total - 1;
+
+      var items = setlistEl.querySelectorAll('.setlist-item');
+      items.forEach(function(el, i) {
+        el.classList.toggle('active', i === idx);
+      });
+
+      var activeItem = items[idx];
+      if (activeItem) activeItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+      wrapper.focus();
+    }
+
+    prevBtn.addEventListener('click', function() { if (currentIdx > 0) goTo(currentIdx - 1); });
+    nextBtn.addEventListener('click', function() { if (currentIdx < tracks.length - 1) goTo(currentIdx + 1); });
+
+    function handleKey(e) {
+      if (e.key === 'ArrowLeft' && currentIdx > 0) {
+        e.preventDefault();
+        goTo(currentIdx - 1);
+      } else if (e.key === 'ArrowRight' && currentIdx < tracks.length - 1) {
+        e.preventDefault();
+        goTo(currentIdx + 1);
+      }
+    }
+    wrapper.addEventListener('keydown', handleKey);
+
+    goTo(0);
   </script>
 </body>
 </html>
