@@ -71,10 +71,11 @@ CLAUDE.md               # This file
    Vercel auto-deploys in ~30 seconds.
 
 ## Current episodes
-| # | Slug | Title | Photos | Location |
-|---|------|-------|--------|----------|
-| 02 | ricoh-vol-1 | Ricoh GR IV, Vol. 1 | 20 | Los Angeles, San Francisco |
-| 01 | coffee-vol-1 | Coffee, Vol. 1 | 20 | Asia, California |
+| # | Slug | Title | Count | Notes |
+|---|------|-------|-------|-------|
+| 03 | suno-vol-1 | Suno, Vol. 1 | 7 tracks | Music episode — Suno embeds, no photos |
+| 02 | ricoh-vol-1 | Ricoh GR IV, Vol. 1 | 20 photos | Los Angeles, San Francisco |
+| 01 | coffee-vol-1 | Coffee, Vol. 1 | 20 photos | Asia, California |
 
 ## Setup tasks (one-time)
 - [ ] Install Claude Code: `npm install -g @anthropic-ai/claude-code`
@@ -91,6 +92,14 @@ CLAUDE.md               # This file
 ```bash
 git add . && git commit -m "describe change" && git push
 ```
+
+## Music episodes (Suno)
+- Template: `suno-vol-1.html` — copy for future music episodes
+- Layout: two-column grid (desktop), single column (mobile ≤640px)
+- Songs driven by a `tracks` JS array: `{ id, title, desc? }`
+- `id` is the Suno song ID from the URL: `suno.com/song/SONG_ID`
+- Embed src: `https://suno.com/embed/SONG_ID` in a 152px-tall iframe
+- No GPS, no lightbox — music episodes are self-contained
 
 ## GPS map feature
 - Clicking "📍 view on map" in the lightbox opens a Google Maps satellite embed pinned to the photo location
