@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Justin Fu — Suno, Vol. 1</title>
+  <meta name="description" content="Original songs created with Suno by Justin Fu.">
+  <meta property="og:title" content="Justin Fu — Suno, Vol. 1">
+  <meta property="og:image" content="images/cover-suno-vol-1.jpg">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◼</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Geist+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0e0d0c; --bg2: #161412; --text: #d4cfc9;
+      --muted: #5a554f; --accent: #c8a96e; --white: #f0ece6;
+      --border: rgba(255,255,255,0.07);
+    }
+    html, body { background: var(--bg); color: var(--text); font-family: 'Geist Mono', monospace; min-height: 100vh; }
+
+    header {
+      padding: 36px 40px 28px;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 20px;
+    }
+    .back {
+      font-size: 11px; color: var(--muted); text-decoration: none;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      transition: color 0.2s; white-space: nowrap;
+    }
+    .back:hover { color: var(--white); }
+    .divider { width: 1px; height: 14px; background: var(--border); flex-shrink: 0; }
+    .ep-label { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); }
+    .ep-title {
+      font-family: 'Cormorant Garamond', serif; font-size: 22px;
+      font-weight: 300; color: var(--white); margin-left: auto;
+    }
+    .ep-count { font-size: 11px; color: var(--muted); letter-spacing: 0.1em; white-space: nowrap; }
+
+    .tracks-wrap {
+      padding: 48px 40px 80px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+    }
+
+    .track-card {
+      border: 1px solid var(--border);
+      background: var(--bg2);
+      padding: 28px 28px 24px;
+    }
+
+    @media (max-width: 640px) {
+      .tracks-wrap {
+        grid-template-columns: 1fr;
+        padding: 16px 16px 60px;
+      }
+      .track-card { padding: 20px 16px 18px; }
+    }
+
+    .track-header {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+    .track-num {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+    .track-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1.2;
+    }
+
+    .track-embed {
+      width: 100%;
+      margin-bottom: 16px;
+    }
+    .track-embed iframe {
+      display: block;
+      width: 100%;
+      height: 152px;
+      border: none;
+      border-radius: 2px;
+    }
+
+    .track-desc {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      line-height: 1.7;
+    }
+
+    footer {
+      border-top: 1px solid var(--border); padding: 22px 40px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    footer span { font-size: 11px; color: var(--muted); letter-spacing: 0.1em; }
+
+    @media (max-width: 540px) {
+      header { padding: 20px; flex-wrap: wrap; gap: 10px; }
+      .ep-title { font-size: 18px; }
+      footer { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="back" href="index.html">← all episodes</a>
+    <div class="divider"></div>
+    <div class="ep-label">Episode 03</div>
+    <div class="ep-title">Suno, Vol. 1</div>
+    <div class="ep-count" id="track-count"></div>
+  </header>
+
+  <div class="tracks-wrap" id="tracks"></div>
+
+  <footer>
+    <span><a href="index.html" style="color:inherit;text-decoration:none;">justinfu.com</a></span>
+    <span>made with suno</span>
+  </footer>
+
+  <script>
+    // To add a song: get the song ID from the Suno URL (suno.com/song/SONG_ID)
+    // then paste it as the id below. title and desc are optional.
+    var tracks = [
+      { id: "ba52be65-3f40-4ca3-94b7-b3d26416e808", title: "Wilyer's House of Bombs" },
+      { id: "e7c2766b-6f8d-4219-8471-5d7ab500bab5", title: "Open Hands Tonight" },
+      { id: "d5ad9c9d-d20d-466c-8482-f2cf9bcfdaf7", title: "Open Hands Yesterday" },
+      { id: "a026258b-7d53-4d51-947d-aa41ac51f959", title: "Open Palm Drive" },
+      { id: "e6b94108-6867-4e37-bc37-ed97f1a6251e", title: "Eightfold Path Progressive House" },
+      { id: "51615056-e8b0-4f00-b31f-b679ee26249c", title: "Eightfold" },
+      { id: "09b1bf02-ed12-4e3e-a5aa-f4e794798edf", title: "Vanilla Teal" },
+    ];
+
+    var container = document.getElementById('tracks');
+    var countEl = document.getElementById('track-count');
+    countEl.textContent = tracks.length + ' track' + (tracks.length !== 1 ? 's' : '');
+
+    tracks.forEach(function(track, i) {
+      var card = document.createElement('div');
+      card.className = 'track-card';
+
+      var num = String(i + 1).padStart(2, '0');
+      var embedSrc = 'https://suno.com/embed/' + track.id;
+
+      card.innerHTML =
+        '<div class="track-header">' +
+          '<div class="track-num">Track ' + num + '</div>' +
+          '<div class="track-title">' + track.title + '</div>' +
+        '</div>' +
+        '<div class="track-embed">' +
+          '<iframe src="' + embedSrc + '" allow="autoplay" loading="lazy"></iframe>' +
+        '</div>' +
+        (track.desc ? '<div class="track-desc">' + track.desc + '</div>' : '');
+
+      container.appendChild(card);
+    });
+  </script>
+</body>
+</html>
