@@ -89,11 +89,11 @@
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--muted);
-      pointer-events: none;
+      pointer-events: auto;
       opacity: 1;
       transition: opacity 0.3s;
     }
-    .embed-loader.hidden { opacity: 0; }
+    .embed-loader.hidden { opacity: 0; pointer-events: none; }
     .stage-nav {
       display: flex;
       align-items: center;
