@@ -88,6 +88,10 @@ CLAUDE.md               # This file
 - [ ] Verify HTTPS works at https://www.justinfu.com
 - [ ] Cancel Laughing Squid once live on Vercel
 
+## Per-clone setup
+- [ ] Activate the GPS pre-commit hook: `git config core.hooksPath .githooks`
+  (Blocks any commit that includes images carrying GPS EXIF. Requires Pillow: `pip3 install Pillow`.)
+
 ## Deploy command
 ```bash
 git add . && git commit -m "describe change" && git push

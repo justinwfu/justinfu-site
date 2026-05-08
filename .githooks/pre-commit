@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+# Block commits that include images carrying GPS EXIF data.
+# Privacy guardrail — see CLAUDE.md.
+
+set -e
+
+staged=$(git diff --cached --name-only --diff-filter=AM | grep -iE '\.(jpe?g|png)$' || true)
+
+if [ -z "$staged" ]; then
+  exit 0
+fi
+
+if ! python3 -c "from PIL import Image" 2>/dev/null; then
+  echo "ERROR: pre-commit hook requires Pillow. Install with: pip3 install Pillow" >&2
+  exit 1
+fi
+
+STAGED_IMAGES="$staged" python3 <<'PY'
+import os, sys
+from PIL import Image
+
+leaks = []
+for path in os.environ.get("STAGED_IMAGES", "").splitlines():
+    path = path.strip()
+    if not path:
+        continue
+    try:
+        img = Image.open(path)
+        exif = img.getexif()
+        if not exif:
+            continue
+        gps_ifd = exif.get_ifd(0x8825)
+        if gps_ifd or 0x8825 in exif:
+            leaks.append(path)
+    except Exception as e:
+        print(f"warn: could not read EXIF from {path}: {e}", file=sys.stderr)
+
+if leaks:
+    print("", file=sys.stderr)
+    print("❌ GPS EXIF data found in staged images:", file=sys.stderr)
+    for p in leaks:
+        print(f"   - {p}", file=sys.stderr)
+    print("", file=sys.stderr)
+    print("Strip GPS before committing (e.g. via /optimize-image, which re-encodes", file=sys.stderr)
+    print("through PIL and drops all EXIF). To bypass intentionally: git commit --no-verify", file=sys.stderr)
+    sys.exit(1)
+PY
