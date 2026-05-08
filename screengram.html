@@ -6,7 +6,7 @@
   <title>Justin Fu — Screengram</title>
   <meta name="description" content="A screenshot of whatever was on your screen, paired with a photo of wherever you were.">
   <meta property="og:title" content="Justin Fu — Screengram">
-  <meta property="og:image" content="images/cover-screengram-vol-1.jpg">
+  <meta property="og:image" content="images/screengram.jpg">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◼</text></svg>">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Geist+Mono:wght@300;400&display=swap" rel="stylesheet">
   <style>
@@ -84,9 +84,17 @@
     }
 
     .output-wrap {
-      margin-top: 64px;
+      margin: 48px 0;
     }
     .output-wrap img {
+      display: block;
+      width: 100%;
+      border-radius: 2px;
+    }
+    .inline-figure {
+      margin: 32px 0;
+    }
+    .inline-figure img {
       display: block;
       width: 100%;
       border-radius: 2px;
@@ -137,6 +145,7 @@
     <div class="section">
       <div class="section-tag">I — 2015</div>
       <p>Frontback died in 2015. The idea it was reaching for didn't.</p>
+      <div class="inline-figure"><img src="images/frontback.jpg" alt="Frontback app"></div>
       <p>The app was simple. Take a photo with your front camera. Take one with your back camera. Combine them. What you were looking at, and what you looked like while looking at it — one image, two realities. It felt honest in a way neither photo alone could be.</p>
     </div>
 
@@ -149,12 +158,11 @@
     <div class="section">
       <div class="section-tag">III — the idea</div>
       <p>Screengram is what Frontback would be if it were made today. A screenshot of whatever was on your screen, paired with a photo of wherever you were. What you were looking at, and where you were while you looked at it.</p>
+      <div class="output-wrap">
+        <img src="images/screengram.jpg" alt="Screengram output — screenshot + photo">
+        <div class="output-caption">screengram no. 1 — may 2026</div>
+      </div>
       <p>The resulting image is strange in the right way. It's more honest than either would be alone.</p>
-    </div>
-
-    <div class="output-wrap">
-      <img src="images/screengram-vol-1-output.jpg" alt="Screengram output — screenshot + photo">
-      <div class="output-caption">screengram no. 1 — may 2026</div>
     </div>
 
     <div class="closing">Screengram — concept, 2026</div>
