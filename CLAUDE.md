@@ -2,7 +2,7 @@
 
 ## What this site is
 A personal photo journal at justinfu.com. Static HTML/CSS/JS — no framework, no build step.
-Hosted on Vercel (target) / Laughing Squid (current). Deployments via `git push`.
+Hosted on Vercel (target) / Laughing Squid (current). Production deploys from `main`; feature branches get Vercel preview URLs.
 
 ## Site structure
 ```
@@ -62,13 +62,17 @@ CLAUDE.md               # This file
    - Add as FIRST card (newest episode goes top-left)
    - Update `header-sub` count: "3 episodes" etc.
 
-5. **Deploy**:
+5. **Ship via feature branch + PR** (see "Branch workflow" below):
    ```bash
+   git checkout -b episode/new-episode-vol-1
    git add .
    git commit -m "add episode: New Episode, Vol. 1"
-   git push
+   git push -u origin episode/new-episode-vol-1
+   gh pr create --fill
+   # review the Vercel preview URL posted on the PR
+   gh pr merge --squash --delete-branch
    ```
-   Vercel auto-deploys in ~30 seconds.
+   Vercel deploys the merged commit to prod in ~30 seconds.
 
 ## Current episodes
 | # | Slug | Title | Count | Notes |
@@ -92,10 +96,28 @@ CLAUDE.md               # This file
 - [ ] Activate the GPS pre-commit hook: `git config core.hooksPath .githooks`
   (Blocks any commit that includes images carrying GPS EXIF. Requires Pillow: `pip3 install Pillow`.)
 
-## Deploy command
+## Branch workflow
+
+All changes ship through a feature branch + PR. **Do not push directly to `main`.**
+Vercel posts a unique preview URL on every PR — review the rendered site there before merging.
+
+**Branch naming:**
+- `episode/<slug>` — new episodes (`episode/screengram`, `episode/ricoh-vol-2`)
+- `fix/<short>` — bug fixes (`fix/audio-overlap`)
+- `chore/<short>` — tooling, config, docs (`chore/gps-hook`)
+
+**Standard flow:**
 ```bash
-git add . && git commit -m "describe change" && git push
+git checkout -b fix/audio-overlap        # branch per logical change
+# ...edit, commit freely (messy WIP commits are fine — they get squashed)...
+git push -u origin fix/audio-overlap
+gh pr create --fill                       # or open in the GitHub UI
+# review the Vercel preview URL on the PR
+gh pr merge --squash --delete-branch      # main gets one clean commit; auto-deploys to prod
 ```
+
+Squash-merging keeps `main`'s history one-commit-per-feature (matching the existing style)
+while letting in-branch commits stay messy. After merge, `git checkout main && git pull`.
 
 ## Music episodes (Suno)
 - Template: `suno-vol-1.html` — copy for future music episodes
@@ -114,7 +136,7 @@ git add . && git commit -m "describe change" && git push
 - Map closes on Esc, clicking outside, or the close button
 
 ## Notes
-- No build step — edit HTML directly, changes are live after push
+- No build step — edit HTML directly, changes go live when the PR merges to `main`
 - Images are the heaviest asset — always optimize before committing
 - The `photos` JS array in each gallery page controls order — reorder freely
 - `white-space: nowrap` on `.ep-location` — keep location strings short
