@@ -265,15 +265,24 @@
       var iframe = document.createElement('iframe');
       iframe.allow = 'autoplay';
       stageEmbedEl.insertBefore(iframe, loader);
-      return { el: iframe, loaded: false };
+      return { el: iframe, loaded: false, loading: false };
     });
+
+    function stopTrack(idx) {
+      var t = iframes[idx];
+      t.el.src = 'about:blank';
+      t.loaded = false;
+      t.loading = false;
+    }
 
     function loadTrack(idx) {
       var t = iframes[idx];
-      if (t.loaded || t.el.src) return;
+      if (t.loaded || t.loading) return;
+      t.loading = true;
       t.el.src = 'https://suno.com/embed/' + tracks[idx].id;
       t.el.addEventListener('load', function() {
         t.loaded = true;
+        t.loading = false;
         if (currentIdx === idx) loader.classList.add('hidden');
       }, { once: true });
     }
@@ -296,6 +305,7 @@
     });
 
     function goTo(idx) {
+      if (idx !== currentIdx) stopTrack(currentIdx);
       currentIdx = idx;
       var total = tracks.length;
       var num = String(idx + 1).padStart(2, '0');
