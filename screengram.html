@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Justin Fu — Screengram</title>
+  <meta name="description" content="A screenshot of whatever was on your screen, paired with a photo of wherever you were.">
+  <meta property="og:title" content="Justin Fu — Screengram">
+  <meta property="og:image" content="images/cover-screengram-vol-1.jpg">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◼</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Geist+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0e0d0c; --bg2: #161412; --text: #d4cfc9;
+      --muted: #5a554f; --accent: #c8a96e; --white: #f0ece6;
+      --border: rgba(255,255,255,0.07);
+    }
+    html, body { background: var(--bg); color: var(--text); font-family: 'Geist Mono', monospace; min-height: 100vh; }
+
+    header {
+      padding: 36px 40px 28px;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 20px;
+    }
+    .back {
+      font-size: 11px; color: var(--muted); text-decoration: none;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      transition: color 0.2s; white-space: nowrap;
+    }
+    .back:hover { color: var(--white); }
+    .divider { width: 1px; height: 14px; background: var(--border); flex-shrink: 0; }
+    .ep-label { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); }
+    .ep-title {
+      font-family: 'Cormorant Garamond', serif; font-size: 22px;
+      font-weight: 300; color: var(--white); margin-left: auto;
+    }
+
+    /* ── essay layout ── */
+    .essay-wrap {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 80px 40px 120px;
+    }
+
+    .essay-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 64px;
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      margin-bottom: 64px;
+    }
+
+    .section {
+      margin-bottom: 56px;
+    }
+
+    .section-tag {
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px;
+      opacity: 0.6;
+    }
+
+    .section p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 300;
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    .section p + p {
+      margin-top: 20px;
+    }
+
+    .section p em {
+      font-style: italic;
+      color: var(--white);
+    }
+
+    .output-wrap {
+      margin-top: 64px;
+    }
+    .output-wrap img {
+      display: block;
+      width: 100%;
+      border-radius: 2px;
+    }
+    .output-caption {
+      margin-top: 12px;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+    }
+
+    .closing {
+      margin-top: 56px;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      opacity: 0.4;
+    }
+
+    footer {
+      border-top: 1px solid var(--border); padding: 22px 40px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    footer span { font-size: 11px; color: var(--muted); letter-spacing: 0.1em; }
+
+    @media (max-width: 540px) {
+      header { padding: 20px; flex-wrap: wrap; gap: 10px; }
+      .ep-title { font-size: 18px; }
+      .essay-wrap { padding: 48px 24px 80px; }
+      .essay-title { font-size: 44px; margin-bottom: 48px; }
+      .section p { font-size: 19px; }
+      footer { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="back" href="index.html">← all episodes</a>
+    <div class="divider"></div>
+    <div class="ep-label">Episode 04</div>
+    <div class="ep-title">Screengram</div>
+  </header>
+
+  <div class="essay-wrap">
+    <h1 class="essay-title">Screengram</h1>
+
+    <div class="section">
+      <div class="section-tag">I — 2015</div>
+      <p>Frontback died in 2015. The idea it was reaching for didn't.</p>
+      <p>The app was simple. Take a photo with your front camera. Take one with your back camera. Combine them. What you were looking at, and what you looked like while looking at it — one image, two realities. It felt honest in a way neither photo alone could be.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-tag">II — now</div>
+      <p>The front camera became a studio. Instagram happened. The back camera got better at making the world look perfect. Both directions optimized toward performance.</p>
+      <p>Something else happened too. The screen became the dominant surface. Most of what we look at now isn't the physical world — it's a rectangle. Maps, messages, faces, feeds. The screen is <em>where we actually are.</em> The front camera captures your face; the back camera captures the room. Neither captures what you were doing.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-tag">III — the idea</div>
+      <p>Screengram is what Frontback would be if it were made today. A screenshot of whatever was on your screen, paired with a photo of wherever you were. What you were looking at, and where you were while you looked at it.</p>
+      <p>The resulting image is strange in the right way. It's more honest than either would be alone.</p>
+    </div>
+
+    <div class="output-wrap">
+      <img src="images/screengram-vol-1-output.jpg" alt="Screengram output — screenshot + photo">
+      <div class="output-caption">screengram no. 1 — may 2026</div>
+    </div>
+
+    <div class="closing">Screengram — concept, 2026</div>
+  </div>
+
+  <footer>
+    <span><a href="index.html" style="color:inherit;text-decoration:none;">justinfu.com</a></span>
+    <span>may 2026</span>
+  </footer>
+</body>
+</html>
