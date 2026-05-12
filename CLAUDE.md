@@ -7,15 +7,19 @@ Hosted on Vercel (target) / Laughing Squid (current). Production deploys from `m
 ## Site structure
 ```
 index.html              # Episode grid homepage
-coffee-vol-1.html       # Gallery: Coffee, Vol. 1
-ricoh-vol-1.html        # Gallery: Ricoh GR IV, Vol. 1
+coffee.html             # Gallery: Coffee
+ricoh.html              # Gallery: Ricoh GR IV
+suno.html               # Music: Buddhist EDM
+screengram.html         # Essay: Screengram
+baseball.html           # Gallery: Baseball
 images/
-  cover-coffee-vol-1.jpg
-  cover-ricoh-vol-1.jpg
-  coffee-vol-1/         # 20 optimized JPEGs
-  ricoh-vol-1/          # 20 optimized JPEGs
+  cover-<slug>.jpg      # 800x533 cover for index card
+  <slug>/               # optimized JPEGs for gallery
 CLAUDE.md               # This file
 ```
+
+Older assets (`cover-coffee-vol-1.jpg`, `images/coffee-vol-1/`, etc.) keep their existing
+`-vol-1` filenames — only new episodes follow the plain-slug convention.
 
 ## Design system
 - Background: `#0e0d0c` (near black)
@@ -26,48 +30,45 @@ CLAUDE.md               # This file
 - Lightbox: custom vanilla JS, keyboard nav (← → Esc), full-height tap zones on mobile
 
 ## Episode naming convention
-- Slug: `{topic}-vol-{n}.html` e.g. `coffee-vol-2.html`, `ricoh-vol-2.html`
+- Slug: plain topic name — `{topic}.html` e.g. `baseball.html`, `screengram.html`
 - Cover image: `images/cover-{slug}.jpg` cropped 3:2, 800px wide, q85
 - Gallery images: `images/{slug}/` folder, max 1600px, q82, progressive JPEG, auto-orient
+- The `-vol-N` suffix was dropped — earlier episodes (coffee, ricoh, suno) still have
+  `-vol-1` in their asset paths but not in their HTML filenames
 
 ## How to add a new episode
 
-1. **Optimize photos** (ImageMagick):
-   ```bash
-   mkdir images/new-episode-vol-1
-   for f in /path/to/raw/*.jpg; do
-     convert "$f" -auto-orient -resize 1600x1600\> -quality 82 -interlace Plane \
-       images/new-episode-vol-1/$(basename "$f")
-   done
+1. **Optimize photos** — use the `/optimize-image` skill, or inline Python:
+   ```python
+   from PIL import Image, ImageOps
+   im = ImageOps.exif_transpose(Image.open(src))
+   im.thumbnail((1600, 1600), Image.LANCZOS)
+   im.convert("RGB").save(dst, "JPEG", quality=82, progressive=True, optimize=True)
    ```
+   Strip EXIF (no GPS) — the pre-commit hook will reject anything with GPS tags.
 
-2. **Create cover image** from best shot:
-   ```bash
-   convert images/new-episode-vol-1/best.jpg \
-     -gravity Center -crop 3:2 +repage \
-     -resize 800x533 -quality 85 \
-     images/cover-new-episode-vol-1.jpg
-   ```
+2. **Create cover image** — center-crop 3:2 from a hero shot, resize to 800x533, q85.
+   Save as `images/cover-{slug}.jpg`.
 
-3. **Copy gallery template** from an existing gallery page and update:
+3. **Copy gallery template** from `ricoh.html` (photo) or `suno.html` (music) and update:
    - `<title>`, `<meta>`, `og:title`, `og:image`
-   - `ep_label` (Episode 03, 04…)
+   - `ep-label` (Episode 05, 06…)
    - `ep-title` in header
    - `photos` JS array — list all image paths
-   - `footer_note` text
+   - footer note text
 
 4. **Add episode card to index.html**:
    - Copy an existing `.episode-card` block
    - Update: `href`, `img src`, `ep-label`, `ep-title`, `ep-meta` (count + location)
    - Add as FIRST card (newest episode goes top-left)
-   - Update `header-sub` count: "3 episodes" etc.
+   - Bump `header-sub` count: "5 episodes" etc.
 
 5. **Ship via feature branch + PR** (see "Branch workflow" below):
    ```bash
-   git checkout -b episode/new-episode-vol-1
+   git checkout -b episode/<slug>
    git add .
-   git commit -m "add episode: New Episode, Vol. 1"
-   git push -u origin episode/new-episode-vol-1
+   git commit -m "add episode: <Title>"
+   git push -u origin episode/<slug>
    gh pr create --fill
    # review the Vercel preview URL posted on the PR
    gh pr merge --squash --delete-branch
@@ -77,9 +78,11 @@ CLAUDE.md               # This file
 ## Current episodes
 | # | Slug | Title | Count | Notes |
 |---|------|-------|-------|-------|
-| 03 | suno-vol-1 | Suno, Vol. 1 | 7 tracks | Music episode — Suno embeds, no photos |
-| 02 | ricoh-vol-1 | Ricoh GR IV, Vol. 1 | 20 photos | Los Angeles, San Francisco |
-| 01 | coffee-vol-1 | Coffee, Vol. 1 | 20 photos | Asia, California |
+| 05 | baseball | Baseball | 4 photos | Dodger Stadium, Los Angeles |
+| 04 | screengram | Screengram | essay | Concept piece, no photos |
+| 03 | suno | Buddhist EDM | 6 tracks | Music episode — Suno embeds, assets under `cover-suno-vol-1.jpg` |
+| 02 | ricoh | Ricoh GR IV | 20 photos | Los Angeles, San Francisco — assets under `ricoh-vol-1/` |
+| 01 | coffee | Coffee | 20 photos | Asia, California — assets under `coffee-vol-1/` |
 
 ## Setup tasks (one-time)
 - [ ] Install Claude Code: `npm install -g @anthropic-ai/claude-code`
@@ -102,7 +105,7 @@ All changes ship through a feature branch + PR. **Do not push directly to `main`
 Vercel posts a unique preview URL on every PR — review the rendered site there before merging.
 
 **Branch naming:**
-- `episode/<slug>` — new episodes (`episode/screengram`, `episode/ricoh-vol-2`)
+- `episode/<slug>` — new episodes (`episode/baseball`, `episode/screengram`)
 - `fix/<short>` — bug fixes (`fix/audio-overlap`)
 - `chore/<short>` — tooling, config, docs (`chore/gps-hook`)
 
@@ -120,7 +123,7 @@ Squash-merging keeps `main`'s history one-commit-per-feature (matching the exist
 while letting in-branch commits stay messy. After merge, `git checkout main && git pull`.
 
 ## Music episodes (Suno)
-- Template: `suno-vol-1.html` — copy for future music episodes
+- Template: `suno.html` — copy for future music episodes
 - Layout: two-column grid (desktop), single column (mobile ≤640px)
 - Songs driven by a `tracks` JS array: `{ id, title, desc? }`
 - `id` is the Suno song ID from the URL: `suno.com/song/SONG_ID`
