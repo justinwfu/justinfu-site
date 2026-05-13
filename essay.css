@@ -86,3 +86,39 @@
   .essay-title { font-size: 44px; margin-bottom: 48px; }
   .section p { font-size: 19px; }
 }
+
+/* ---- manifesto-style essay additions (sontag.html) ---- */
+.section-numeral {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 56px;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.section p.dropcap::first-letter {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 3.2em;
+  line-height: 0.9;
+  float: left;
+  padding: 6px 10px 0 0;
+  color: var(--white);
+}
+.colophon {
+  margin-top: 80px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  font-style: italic;
+  color: var(--white);
+  text-align: center;
+}
+@media (max-width: 540px) {
+  .section-numeral { font-size: 42px; }
+  .section p.dropcap::first-letter { font-size: 2.6em; }
+  .colophon { font-size: 19px; margin-top: 56px; }
+}
