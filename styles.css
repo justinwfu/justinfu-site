@@ -169,3 +169,8 @@ body.home footer {
   .index-grid { padding: 20px; gap: 12px; grid-template-columns: 1fr; }
   body.home footer { padding: 20px; }
 }
+
+/* ---- essay cards: slightly darker bottom gradient ---- */
+.episode-card--essay .episode-info {
+  background: linear-gradient(to top, rgba(14,13,12,0.92) 0%, rgba(14,13,12,0.55) 60%, rgba(14,13,12,0) 100%);
+}
