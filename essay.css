@@ -1,0 +1,88 @@
+/* ============================================================
+   essay.css — essay-page layout
+   Loaded by: screengram.html, sontag.html
+   ============================================================ */
+
+.essay-wrap {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 80px 40px 120px;
+}
+
+.essay-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 64px;
+  font-weight: 300;
+  color: var(--white);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  margin-bottom: 64px;
+}
+
+.section {
+  margin-bottom: 56px;
+}
+
+.section-tag {
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 20px;
+  opacity: 0.6;
+}
+
+.section p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 300;
+  color: var(--text);
+  line-height: 1.65;
+}
+
+.section p + p {
+  margin-top: 20px;
+}
+
+.section p em {
+  font-style: italic;
+  color: var(--white);
+}
+
+.output-wrap {
+  margin: 48px 0;
+}
+.output-wrap img {
+  display: block;
+  width: 100%;
+  border-radius: 2px;
+}
+.inline-figure {
+  margin: 32px 0;
+}
+.inline-figure img {
+  display: block;
+  width: 100%;
+  border-radius: 2px;
+}
+.output-caption {
+  margin-top: 12px;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+}
+
+.closing {
+  margin-top: 56px;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  opacity: 0.4;
+}
+
+@media (max-width: 540px) {
+  .essay-wrap { padding: 48px 24px 80px; }
+  .essay-title { font-size: 44px; margin-bottom: 48px; }
+  .section p { font-size: 19px; }
+}
