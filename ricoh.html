@@ -68,6 +68,8 @@
     var lbCounter = document.getElementById('lb-counter');
     function openLB(i) {
       current = i; lbImg.src = photos[i];
+      if (photos[i+1]) new Image().src = photos[i+1];
+      if (photos[i-1]) new Image().src = photos[i-1];
       lbCounter.textContent = (i+1) + ' / ' + photos.length;
       lb.classList.add('open'); document.body.style.overflow = 'hidden';
     }
@@ -75,6 +77,8 @@
     function navLB(dir) {
       current = (current + dir + photos.length) % photos.length;
       lbImg.src = photos[current];
+      if (photos[current+1]) new Image().src = photos[current+1];
+      if (photos[current-1]) new Image().src = photos[current-1];
       lbCounter.textContent = (current+1) + ' / ' + photos.length;
     }
     lb.addEventListener('click', function(e) { if (e.target === lb) closeLB(); });
