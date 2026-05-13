@@ -11,11 +11,11 @@
   <meta property="og:title" content="Justin Fu — Coffee">
   <meta property="og:description" content="A specialty coffee photo journal by Justin Fu.">
   <meta property="og:url" content="https://justinfu.com/coffee.html">
-  <meta property="og:image" content="https://justinfu.com/images/cover-coffee-vol-1.jpg">
+  <meta property="og:image" content="https://justinfu.com/images/cover-coffee.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Justin Fu — Coffee">
   <meta name="twitter:description" content="A specialty coffee photo journal by Justin Fu.">
-  <meta name="twitter:image" content="https://justinfu.com/images/cover-coffee-vol-1.jpg">
+  <meta name="twitter:image" content="https://justinfu.com/images/cover-coffee.jpg">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◼</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -57,7 +57,7 @@
   </footer>
 
   <script>
-    var photos = ["images/coffee-vol-1/glitch-trio.jpg", "images/coffee-vol-1/geisha-pour.jpg", "images/coffee-vol-1/bw-coffee-sign.jpg", "images/coffee-vol-1/latte-tray.jpg", "images/coffee-vol-1/coffee-omakase.jpg", "images/coffee-vol-1/bw-blackcup.jpg", "images/coffee-vol-1/simple-kaffa-duo.jpg", "images/coffee-vol-1/lost-origin.jpg", "images/coffee-vol-1/bw-slowbar.jpg", "images/coffee-vol-1/compass-latte.jpg", "images/coffee-vol-1/croissant-cafe.jpg", "images/coffee-vol-1/koffee-mameya.jpg", "images/coffee-vol-1/bw-hand-cup.jpg", "images/coffee-vol-1/mame-latte.jpg", "images/coffee-vol-1/simple-kaffa-geisha.jpg", "images/coffee-vol-1/coffee-beach.jpg", "images/coffee-vol-1/compass-street.jpg", "images/coffee-vol-1/pourover-scale.jpg", "images/coffee-vol-1/bw-playing-coffee.jpg"];
+    var photos = ["images/coffee/glitch-trio.jpg", "images/coffee/geisha-pour.jpg", "images/coffee/bw-coffee-sign.jpg", "images/coffee/latte-tray.jpg", "images/coffee/coffee-omakase.jpg", "images/coffee/bw-blackcup.jpg", "images/coffee/simple-kaffa-duo.jpg", "images/coffee/lost-origin.jpg", "images/coffee/bw-slowbar.jpg", "images/coffee/compass-latte.jpg", "images/coffee/croissant-cafe.jpg", "images/coffee/koffee-mameya.jpg", "images/coffee/bw-hand-cup.jpg", "images/coffee/mame-latte.jpg", "images/coffee/simple-kaffa-geisha.jpg", "images/coffee/coffee-beach.jpg", "images/coffee/compass-street.jpg", "images/coffee/pourover-scale.jpg", "images/coffee/bw-playing-coffee.jpg"];
     var current = 0;
     var gallery = document.getElementById('gallery');
     photos.forEach(function(src, i) {
@@ -75,6 +75,8 @@
     var lbCounter = document.getElementById('lb-counter');
     function openLB(i) {
       current = i; lbImg.src = photos[i];
+      if (photos[i+1]) new Image().src = photos[i+1];
+      if (photos[i-1]) new Image().src = photos[i-1];
       lbCounter.textContent = (i+1) + ' / ' + photos.length;
       lb.classList.add('open'); document.body.style.overflow = 'hidden'; updateMapBtn();
     }
@@ -82,6 +84,8 @@
     function navLB(dir) {
       current = (current + dir + photos.length) % photos.length;
       lbImg.src = photos[current];
+      if (photos[current+1]) new Image().src = photos[current+1];
+      if (photos[current-1]) new Image().src = photos[current-1];
       lbCounter.textContent = (current+1) + ' / ' + photos.length;
       updateMapBtn();
     }
@@ -94,47 +98,47 @@
     });
 
     var GPS = {
-      "images/coffee-vol-1/latte-tray.jpg": {
+      "images/coffee/latte-tray.jpg": {
             "lat": 37.798467,
             "lng": -122.422225
       },
-      "images/coffee-vol-1/geisha-pour.jpg": {
+      "images/coffee/geisha-pour.jpg": {
             "lat": 22.998583,
             "lng": 120.203683
       },
-      "images/coffee-vol-1/simple-kaffa-duo.jpg": {
+      "images/coffee/simple-kaffa-duo.jpg": {
             "lat": 25.043861,
             "lng": 121.527786
       },
-      "images/coffee-vol-1/compass-street.jpg": {
+      "images/coffee/compass-street.jpg": {
             "lat": 34.667069,
             "lng": 135.508042
       },
-      "images/coffee-vol-1/simple-kaffa-geisha.jpg": {
+      "images/coffee/simple-kaffa-geisha.jpg": {
             "lat": 25.043756,
             "lng": 121.527717
       },
-      "images/coffee-vol-1/koffee-mameya.jpg": {
+      "images/coffee/koffee-mameya.jpg": {
             "lat": 35.6684,
             "lng": 139.710953
       },
-      "images/coffee-vol-1/mame-latte.jpg": {
+      "images/coffee/mame-latte.jpg": {
             "lat": 35.662636,
             "lng": 139.744431
       },
-      "images/coffee-vol-1/compass-latte.jpg": {
+      "images/coffee/compass-latte.jpg": {
             "lat": 35.702828,
             "lng": 139.797836
       },
-      "images/coffee-vol-1/coffee-omakase.jpg": {
+      "images/coffee/coffee-omakase.jpg": {
             "lat": 35.668961,
             "lng": 139.709
       },
-      "images/coffee-vol-1/glitch-trio.jpg": {
+      "images/coffee/glitch-trio.jpg": {
             "lat": 35.685356,
             "lng": 139.776108
       },
-      "images/coffee-vol-1/lost-origin.jpg": {
+      "images/coffee/lost-origin.jpg": {
             "lat": 35.702778,
             "lng": 139.797822
       }
