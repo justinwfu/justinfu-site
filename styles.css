@@ -170,17 +170,7 @@ body.home footer {
   body.home footer { padding: 20px; }
 }
 
-/* ---- header manifesto link + category chips on cards ---- */
-.manifesto-link {
-  color: var(--accent);
-  text-decoration: none;
-  font-style: italic;
-  font-family: 'Cormorant Garamond', serif;
-  letter-spacing: 0;
-  text-transform: none;
-}
-.manifesto-link:hover { color: var(--white); }
-
+/* ---- category chips on cards ---- */
 .ep-chip {
   position: absolute;
   top: 12px;
