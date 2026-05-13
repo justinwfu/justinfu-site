@@ -18,9 +18,6 @@ images/
 CLAUDE.md               # This file
 ```
 
-Older assets (`cover-coffee-vol-1.jpg`, `images/coffee-vol-1/`, etc.) keep their existing
-`-vol-1` filenames — only new episodes follow the plain-slug convention.
-
 ## Design system
 - Background: `#0e0d0c` (near black)
 - Text: `#d4cfc9` (warm off-white)
@@ -33,8 +30,6 @@ Older assets (`cover-coffee-vol-1.jpg`, `images/coffee-vol-1/`, etc.) keep their
 - Slug: plain topic name — `{topic}.html` e.g. `baseball.html`, `screengram.html`
 - Cover image: `images/cover-{slug}.jpg` cropped 3:2, 800px wide, q85
 - Gallery images: `images/{slug}/` folder, max 1600px, q82, progressive JPEG, auto-orient
-- The `-vol-N` suffix was dropped — earlier episodes (coffee, ricoh, suno) still have
-  `-vol-1` in their asset paths but not in their HTML filenames
 
 ## How to add a new episode
 
@@ -82,9 +77,9 @@ Older assets (`cover-coffee-vol-1.jpg`, `images/coffee-vol-1/`, etc.) keep their
 | 06 | sontag | Sontag | essay | On photography |
 | 05 | baseball | Baseball | 4 photos | Dodger Stadium, Los Angeles |
 | 04 | screengram | Screengram | essay | Concept piece, no photos |
-| 03 | suno | Buddhist EDM | 6 tracks | Music episode — Suno embeds, assets under `cover-suno-vol-1.jpg` |
-| 02 | ricoh | Ricoh GR IV | 20 photos | Los Angeles, San Francisco — assets under `ricoh-vol-1/` |
-| 01 | coffee | Coffee | 20 photos | Asia, California — assets under `coffee-vol-1/` |
+| 03 | suno | Buddhist EDM | 6 tracks | Music episode — Suno embeds |
+| 02 | ricoh | Ricoh GR IV | 20 photos | Los Angeles, San Francisco |
+| 01 | coffee | Coffee | 20 photos | Asia, California |
 
 ## Setup tasks (one-time)
 - [ ] Install Claude Code: `npm install -g @anthropic-ai/claude-code`
