@@ -78,6 +78,8 @@ Older assets (`cover-coffee-vol-1.jpg`, `images/coffee-vol-1/`, etc.) keep their
 ## Current episodes
 | # | Slug | Title | Count | Notes |
 |---|------|-------|-------|-------|
+| 07 | kites | Ce jeu de cerfs-volants | 2 videos | Video episode — YouTube embeds (Geographer + YELLE) |
+| 06 | sontag | Sontag | essay | On photography |
 | 05 | baseball | Baseball | 4 photos | Dodger Stadium, Los Angeles |
 | 04 | screengram | Screengram | essay | Concept piece, no photos |
 | 03 | suno | Buddhist EDM | 6 tracks | Music episode — Suno embeds, assets under `cover-suno-vol-1.jpg` |
@@ -129,6 +131,16 @@ while letting in-branch commits stay messy. After merge, `git checkout main && g
 - `id` is the Suno song ID from the URL: `suno.com/song/SONG_ID`
 - Embed src: `https://suno.com/embed/SONG_ID` in a 152px-tall iframe
 - No GPS, no lightbox — music episodes are self-contained
+
+## Video episodes (YouTube)
+- Template: `kites.html` — copy for future video episodes
+- Layout: stacked vertical `.video-card`s, each with a `01`/`02` numeral and a 16:9 frame; no setlist sidebar, no JS, no prev/next nav
+- Stylesheet: `video.css` (loaded alongside `styles.css`; gallery.css is NOT loaded)
+- Embed src: `https://www.youtube-nocookie.com/embed/<VIDEO_ID>` (privacy-enhanced; works for IDs sourced from both `youtube.com` and `music.youtube.com`)
+- Each iframe needs: `loading="lazy"`, full `allow=` permissions string (incl. `fullscreen`), `allowfullscreen`, `referrerpolicy="strict-origin-when-cross-origin"`, and a `title` attribute (looked up via `youtube.com/oembed` for screen readers — no visible title)
+- Cover image: pull `https://img.youtube.com/vi/<VIDEO_ID>/maxresdefault.jpg`, then `PIL.ImageOps.fit` to 800×533 q85 (crops ~12% off left/right since source is 16:9 and the index card enforces 3:2)
+- **Pre-flight check:** before opening the PR, open each `youtube-nocookie.com/embed/<ID>` in an incognito tab. Music-label tracks sometimes return "Video unavailable" silently — swap to the regular YT URL or drop the video if blocked
+- For N>4 videos consider click-to-load so you don't hammer YouTube on page load (`loading="lazy"` only helps off-screen)
 
 ## GPS map feature
 - Clicking "📍 view on map" in the lightbox opens a Google Maps satellite embed pinned to the photo location
