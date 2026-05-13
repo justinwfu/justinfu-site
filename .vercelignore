@@ -1,0 +1,6 @@
+.claude/
+.githooks/
+scripts/
+CLAUDE.md
+*.md
+.gitignore
