@@ -1,0 +1,262 @@
+/* ============================================================
+   gallery.css — masonry galleries, lightbox, map overlay,
+                 and the Suno music-episode player.
+   Loaded by: coffee.html, ricoh.html, baseball.html, suno.html
+   (Map rules are inert on pages that don't render the map HTML.)
+   ============================================================ */
+
+.gallery-wrap { padding: 28px 40px 80px; }
+.masonry { columns: 3; column-gap: var(--col-gap); }
+@media (max-width: 900px) { .masonry { columns: 2; } }
+@media (max-width: 540px) {
+  .masonry { columns: 1; }
+  .gallery-wrap { padding: 16px 16px 60px; }
+}
+
+.photo-item {
+  break-inside: avoid; margin-bottom: var(--col-gap);
+  overflow: hidden; cursor: pointer; background: var(--bg2);
+}
+.photo-item img {
+  display: block; width: 100%; height: auto;
+  transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94), opacity 0.35s;
+  opacity: 0;
+}
+.photo-item img.loaded { opacity: 1; }
+.photo-item:hover img { transform: scale(1.03); }
+
+/* ---- lightbox ---- */
+#lightbox {
+  display: none; position: fixed; inset: 0;
+  background: rgba(10,9,8,0.97); z-index: 1000;
+  align-items: center; justify-content: center; cursor: zoom-out;
+}
+#lightbox.open { display: flex; }
+#lightbox img {
+  max-width: min(90vw,1200px); max-height: 90vh;
+  object-fit: contain; display: block;
+  animation: lbIn 0.22s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+@keyframes lbIn { from { opacity:0; transform:scale(0.96); } to { opacity:1; transform:scale(1); } }
+.lb-close {
+  position: fixed; top: 22px; right: 26px;
+  font-size: 11px; letter-spacing: 0.15em; color: var(--muted);
+  cursor: pointer; text-transform: uppercase; transition: color 0.2s;
+}
+.lb-close:hover { color: var(--white); }
+.lb-nav {
+  position: fixed; top: 0; bottom: 0; width: 80px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; letter-spacing: 0.1em; color: var(--muted);
+  cursor: pointer; text-transform: uppercase; transition: color 0.2s, background 0.2s;
+  user-select: none; -webkit-tap-highlight-color: transparent;
+}
+.lb-nav:hover { color: var(--white); background: rgba(255,255,255,0.03); }
+#lb-prev { left: 0; } #lb-next { right: 0; }
+.lb-counter {
+  position: fixed; bottom: 26px; left: 50%; transform: translateX(-50%);
+  font-size: 11px; color: var(--muted); letter-spacing: 0.12em;
+}
+@media (max-width: 540px) {
+  .lb-nav { width: 52px; font-size: 10px; }
+  .lb-close { top: 16px; right: 16px; }
+}
+
+/* ---- map overlay (coffee gallery only renders the HTML, but
+   leaving the styles here is harmless on other pages) ---- */
+#map-overlay {
+  display: none; position: fixed; inset: 0; z-index: 2000;
+  background: rgba(10,9,8,0.97);
+  flex-direction: column; align-items: center; justify-content: center;
+}
+#map-overlay.open { display: flex; }
+#map-container {
+  width: min(92vw, 700px); height: min(60vh, 480px);
+  border-radius: 4px; overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.08);
+}
+#map-container iframe { width: 100%; height: 100%; border: none; display: block; }
+.map-close {
+  position: fixed; top: 22px; right: 26px;
+  font-size: 11px; letter-spacing: 0.15em; color: var(--muted);
+  cursor: pointer; text-transform: uppercase; transition: color 0.2s;
+  font-family: 'Geist Mono', monospace;
+}
+.map-close:hover { color: var(--white); }
+.map-label {
+  margin-top: 16px; font-size: 11px; color: var(--muted);
+  letter-spacing: 0.12em; text-transform: uppercase;
+  font-family: 'Geist Mono', monospace;
+}
+.map-no-gps {
+  font-size: 13px; color: var(--muted); letter-spacing: 0.1em;
+  font-family: 'Geist Mono', monospace; text-align: center;
+}
+
+#lb-map-btn {
+  position: fixed; bottom: 26px; right: 32px;
+  font-size: 11px; letter-spacing: 0.13em; text-transform: uppercase;
+  color: var(--muted); cursor: pointer; transition: color 0.2s;
+  font-family: 'Geist Mono', monospace;
+  -webkit-tap-highlight-color: transparent;
+  display: none;
+}
+#lb-map-btn.visible { display: block; }
+#lb-map-btn:hover { color: var(--accent); }
+#lb-map-btn.no-gps { color: var(--muted); opacity: 0.35; cursor: default; }
+@media (max-width: 540px) {
+  #lb-map-btn { bottom: 20px; right: 20px; }
+  #map-container { height: min(55vw, 320px); }
+}
+
+/* ============================================================
+   suno.html — music player layout
+   ============================================================ */
+
+.player-wrap {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  min-height: calc(100vh - 89px - 65px);
+}
+
+.stage {
+  padding: 52px 52px 44px;
+  border-left: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+}
+.stage-label {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+.stage-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 44px;
+  font-weight: 300;
+  color: var(--white);
+  line-height: 1.15;
+  margin-bottom: 36px;
+}
+.stage-embed {
+  position: relative;
+}
+.stage-embed iframe {
+  display: none;
+  width: 100%;
+  height: 152px;
+  border: none;
+  border-radius: 2px;
+}
+.stage-embed iframe.active {
+  display: block;
+}
+.embed-loader {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  pointer-events: auto;
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+.embed-loader.hidden { opacity: 0; pointer-events: none; }
+.stage-nav {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin-top: 28px;
+}
+.nav-btn {
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s;
+}
+.nav-btn:hover:not(:disabled) { color: var(--white); }
+.nav-btn:disabled { opacity: 0.2; cursor: default; }
+.stage-counter {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.12em;
+}
+.stage-hint {
+  margin-top: auto;
+  padding-top: 40px;
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  opacity: 0.5;
+}
+
+.setlist {
+  overflow-y: auto;
+  border-right: 1px solid var(--border);
+}
+.setlist-header {
+  padding: 18px 24px 14px;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+}
+.setlist-item {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.setlist-item:hover { background: var(--bg2); }
+.setlist-item.active { background: var(--bg2); }
+.setlist-num {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: var(--muted);
+  flex-shrink: 0;
+  transition: color 0.2s;
+}
+.setlist-item.active .setlist-num { color: var(--accent); }
+.setlist-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px;
+  font-weight: 300;
+  color: var(--text);
+  line-height: 1.3;
+  transition: color 0.2s;
+}
+.setlist-item.active .setlist-name { color: var(--white); }
+
+@media (max-width: 640px) {
+  .player-wrap {
+    display: flex;
+    flex-direction: column;
+    min-height: auto;
+  }
+  .setlist { order: 1; border-right: none; border-top: 1px solid var(--border); }
+  .stage {
+    order: 0;
+    padding: 28px 20px 24px;
+    border-left: none;
+    border-bottom: none;
+  }
+  .stage-title { font-size: 32px; margin-bottom: 24px; }
+  .stage-hint { display: none; }
+  .setlist-item { padding: 16px 20px; }
+}
