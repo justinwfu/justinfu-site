@@ -4,14 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#0e0d0c">
-  <title>Justin Fu</title>
+  <title>Justin Fu — Photo journal</title>
   <meta name="description" content="A personal photo journal by Justin Fu.">
+  <meta name="author" content="Justin Fu">
+  <link rel="alternate" type="application/atom+xml" title="Justin Fu" href="/feed.xml">
   <link rel="canonical" href="https://justinfu.com/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Justin Fu">
   <meta property="og:description" content="A personal photo journal by Justin Fu.">
   <meta property="og:url" content="https://justinfu.com/">
   <meta property="og:image" content="https://justinfu.com/images/cover-ricoh.jpg">
+  <meta property="og:image:width" content="800">
+  <meta property="og:image:height" content="533">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Justin Fu">
   <meta name="twitter:description" content="A personal photo journal by Justin Fu.">
@@ -24,6 +28,27 @@
   <link rel="stylesheet" href="styles.css">
   <script defer src="/_vercel/insights/script.js"></script>
   <script defer src="/_vercel/speed-insights/script.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://justinfu.com/#person",
+        "name": "Justin Fu",
+        "url": "https://justinfu.com/"
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://justinfu.com/#website",
+        "url": "https://justinfu.com/",
+        "name": "Justin Fu",
+        "description": "A personal photo journal by Justin Fu.",
+        "author": { "@id": "https://justinfu.com/#person" }
+      }
+    ]
+  }
+  </script>
 </head>
 <body class="home">
   <header>
@@ -33,73 +58,73 @@
 
   <div class="index-grid">
 
-    <a class="episode-card" href="kites.html">
+    <a class="episode-card" href="/kites">
       <img src="images/cover-kites.jpg" alt="Ce jeu de cerfs-volants" width="800" height="533" decoding="async">
       <div class="ep-arrow">↗</div>
       <div class="episode-info">
         <div class="ep-label">Episode 07</div>
         <div class="ep-title">Ce jeu de cerfs-volants</div>
-        <div class="ep-meta">2 videos<span class="ep-location">youtube</span><span class="ep-location">May 13, 2026</span></div>
+        <div class="ep-meta">2 videos<span class="ep-location">youtube</span><span class="ep-location"><time datetime="2026-05-13">May 13, 2026</time></span></div>
       </div>
     </a>
 
-    <a class="episode-card episode-card--essay" href="sontag.html">
+    <a class="episode-card episode-card--essay" href="/sontag">
       <img src="images/ricoh/beach-skater.jpg" alt="Black-and-white skater on a beach boardwalk" width="800" height="533" loading="lazy" decoding="async">
       <div class="ep-arrow">↗</div>
       <div class="episode-info">
         <div class="ep-label">Episode 06</div>
         <div class="ep-title">Sontag</div>
-        <div class="ep-meta">essay<span class="ep-location">on photography</span><span class="ep-location">May 13, 2026</span></div>
+        <div class="ep-meta">essay<span class="ep-location">on photography</span><span class="ep-location"><time datetime="2026-05-13">May 13, 2026</time></span></div>
       </div>
     </a>
 
-    <a class="episode-card" href="baseball.html">
+    <a class="episode-card" href="/baseball">
       <img src="images/cover-baseball.jpg" alt="Baseball" width="800" height="533" loading="lazy" decoding="async">
       <div class="ep-arrow">↗</div>
       <div class="episode-info">
         <div class="ep-label">Episode 05</div>
         <div class="ep-title">Baseball</div>
-        <div class="ep-meta">3 photographs<span class="ep-location">Dodger Stadium, Los Angeles</span><span class="ep-location">May 12, 2026</span></div>
+        <div class="ep-meta">3 photographs<span class="ep-location">Dodger Stadium, Los Angeles</span><span class="ep-location"><time datetime="2026-05-12">May 12, 2026</time></span></div>
       </div>
     </a>
 
-    <a class="episode-card episode-card--essay" href="screengram.html">
+    <a class="episode-card episode-card--essay" href="/screengram">
       <img src="images/screengram.jpg" alt="Screengram, Vol. 1" width="800" height="533" loading="lazy" decoding="async">
       <div class="ep-arrow">↗</div>
       <div class="episode-info">
         <div class="ep-label">Episode 04</div>
         <div class="ep-title">Screengram</div>
-        <div class="ep-meta">essay<span class="ep-location">concept</span><span class="ep-location">May 7, 2026</span></div>
+        <div class="ep-meta">essay<span class="ep-location">concept</span><span class="ep-location"><time datetime="2026-05-07">May 7, 2026</time></span></div>
       </div>
     </a>
 
-    <a class="episode-card" href="suno.html">
+    <a class="episode-card" href="/suno">
       <img src="images/cover-suno.jpg" alt="Suno, Vol. 1" width="800" height="533" loading="lazy" decoding="async">
       <div class="ep-arrow">↗</div>
       <div class="episode-info">
         <div class="ep-label">Episode 03</div>
         <div class="ep-title">Buddhist EDM</div>
-        <div class="ep-meta">6 tracks<span class="ep-location">AI-generated with Suno</span><span class="ep-location">May 7, 2026</span></div>
+        <div class="ep-meta">6 tracks<span class="ep-location">AI-generated with Suno</span><span class="ep-location"><time datetime="2026-05-07">May 7, 2026</time></span></div>
       </div>
     </a>
 
-    <a class="episode-card" href="ricoh.html">
+    <a class="episode-card" href="/ricoh">
       <img src="images/cover-ricoh.jpg" alt="Ricoh GR IV, Vol. 1" width="800" height="533" loading="lazy" decoding="async">
       <div class="ep-arrow">↗</div>
       <div class="episode-info">
         <div class="ep-label">Episode 02</div>
         <div class="ep-title">Ricoh GR IV</div>
-        <div class="ep-meta">16 photographs<span class="ep-location">Los Angeles, San Francisco</span><span class="ep-location">May 6, 2026</span></div>
+        <div class="ep-meta">16 photographs<span class="ep-location">Los Angeles, San Francisco</span><span class="ep-location"><time datetime="2026-05-06">May 6, 2026</time></span></div>
       </div>
     </a>
 
-    <a class="episode-card" href="coffee.html">
+    <a class="episode-card" href="/coffee">
       <img src="images/cover-coffee.jpg" alt="Coffee, Vol. 1" width="800" height="533" loading="lazy" decoding="async">
       <div class="ep-arrow">↗</div>
       <div class="episode-info">
         <div class="ep-label">Episode 01</div>
         <div class="ep-title">Coffee</div>
-        <div class="ep-meta">19 photographs<span class="ep-location">Asia, California</span><span class="ep-location">May 5, 2026</span></div>
+        <div class="ep-meta">19 photographs<span class="ep-location">Asia, California</span><span class="ep-location"><time datetime="2026-05-05">May 5, 2026</time></span></div>
       </div>
     </a>
 

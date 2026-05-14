@@ -44,11 +44,27 @@ footer {
 }
 footer span { font-size: 11px; color: var(--muted); letter-spacing: 0.1em; }
 
+/* ---- prev/next episode nav (above footer on episode pages) ---- */
+.ep-nav {
+  border-top: 1px solid var(--border);
+  padding: 18px 40px;
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 12px;
+}
+.ep-nav a {
+  font-size: 11px; color: var(--muted); text-decoration: none;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  transition: color 0.2s;
+}
+.ep-nav a:hover { color: var(--white); }
+.ep-nav .spacer { flex: 1; }
+
 /* ---- shared mobile (≤540px) ---- */
 @media (max-width: 540px) {
   header { padding: 20px; flex-wrap: wrap; gap: 10px; }
   .ep-title { font-size: 18px; }
   footer { padding: 20px; }
+  .ep-nav { padding: 16px 20px; font-size: 10px; }
 }
 
 /* ============================================================

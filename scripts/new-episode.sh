@@ -49,6 +49,7 @@ TITLE="$3"
 LOCATION="$4"
 COUNT="${5:-0}"
 TODAY="$(date '+%B %-d, %Y')"
+TODAY_ISO="$(date '+%Y-%m-%d')"
 # portable lowercase (avoid bash 4+ ${var,,}; macOS ships bash 3.2)
 LOCATION_LOWER="$(printf '%s' "$LOCATION" | tr '[:upper:]' '[:lower:]')"
 
@@ -80,6 +81,7 @@ cat > "${SLUG}.html" <<HTML
   <meta name="theme-color" content="#0e0d0c">
   <title>Justin Fu — ${TITLE}</title>
   <meta name="description" content="Photographs from ${LOCATION} by Justin Fu.">
+  <meta name="author" content="Justin Fu">
   <link rel="canonical" href="https://justinfu.com/${SLUG}.html">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Justin Fu — ${TITLE}">
@@ -94,13 +96,24 @@ cat > "${SLUG}.html" <<HTML
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Geist+Mono:wght@300;400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="gallery.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ImageGallery",
+    "name": "${TITLE}",
+    "description": "Photographs from ${LOCATION} by Justin Fu.",
+    "url": "https://justinfu.com/${SLUG}.html",
+    "datePublished": "${TODAY_ISO}",
+    "creator": { "@type": "Person", "name": "Justin Fu", "url": "https://justinfu.com/" }
+  }
+  </script>
 </head>
 <body>
   <header>
-    <a class="back" href="index.html">← all episodes</a>
+    <a class="back" href="/">← all episodes</a>
     <div class="divider"></div>
     <div class="ep-label">Episode ${EP}</div>
-    <div class="ep-title">${TITLE}</div>
+    <h1 class="ep-title">${TITLE}</h1>
     <div class="ep-count">${COUNT} photographs</div>
   </header>
 
@@ -117,23 +130,23 @@ cat > "${SLUG}.html" <<HTML
   </div>
 
   <footer>
-    <span><a href="index.html" style="color:inherit;text-decoration:none;">justinfu.com</a></span>
+    <span><a href="/" style="color:inherit;text-decoration:none;">justinfu.com</a></span>
     <span>${LOCATION_LOWER}</span>
   </footer>
 
   <script>
-    // TODO: list your optimized JPEGs in load order
+    // TODO: list your optimized JPEGs with descriptive alt and intrinsic w/h.
+    // Run \`python3 -c "from PIL import Image; ..."\` to get dimensions.
     var photos = [
-      // "images/${SLUG}/first.jpg",
-      // "images/${SLUG}/second.jpg",
+      // { src: "images/${SLUG}/first.jpg", alt: "Describe what is in this photo", w: 1600, h: 1067 },
     ];
     var current = 0;
     var gallery = document.getElementById('gallery');
-    photos.forEach(function(src, i) {
+    photos.forEach(function(p, i) {
       var item = document.createElement('div');
       item.className = 'photo-item';
       var img = document.createElement('img');
-      img.src = src; img.alt = 'Photograph ' + (i+1); img.loading = 'lazy';
+      img.src = p.src; img.alt = p.alt; img.width = p.w; img.height = p.h; img.loading = 'lazy';
       img.onload = function() { this.classList.add('loaded'); };
       item.appendChild(img);
       item.addEventListener('click', function() { openLB(i); });
@@ -143,14 +156,14 @@ cat > "${SLUG}.html" <<HTML
     var lbImg = document.getElementById('lb-img');
     var lbCounter = document.getElementById('lb-counter');
     function openLB(i) {
-      current = i; lbImg.src = photos[i];
+      current = i; lbImg.src = photos[i].src; lbImg.alt = photos[i].alt;
       lbCounter.textContent = (i+1) + ' / ' + photos.length;
       lb.classList.add('open'); document.body.style.overflow = 'hidden';
     }
     function closeLB() { lb.classList.remove('open'); document.body.style.overflow = ''; }
     function navLB(dir) {
       current = (current + dir + photos.length) % photos.length;
-      lbImg.src = photos[current];
+      lbImg.src = photos[current].src; lbImg.alt = photos[current].alt;
       lbCounter.textContent = (current+1) + ' / ' + photos.length;
     }
     lb.addEventListener('click', function(e) { if (e.target === lb) closeLB(); });
@@ -170,7 +183,7 @@ mkdir -p "images/${SLUG}"
 
 # Insert card at top of index grid + bump episode count.
 # Python keeps quoting/regex safety simple vs sed.
-SLUG="$SLUG" EP="$EP" TITLE="$TITLE" LOCATION="$LOCATION" COUNT="$COUNT" TODAY="$TODAY" \
+SLUG="$SLUG" EP="$EP" TITLE="$TITLE" LOCATION="$LOCATION" COUNT="$COUNT" TODAY="$TODAY" TODAY_ISO="$TODAY_ISO" \
 python3 - <<'PYEOF'
 import os, re, sys
 
@@ -180,15 +193,16 @@ title = os.environ['TITLE']
 location = os.environ['LOCATION']
 count = os.environ['COUNT']
 today = os.environ['TODAY']
+today_iso = os.environ['TODAY_ISO']
 
 card = (
     f'    <a class="episode-card" href="{slug}.html">\n'
-    f'      <img src="images/cover-{slug}.jpg" alt="{title}">\n'
+    f'      <img src="images/cover-{slug}.jpg" alt="{title}" width="800" height="533" loading="lazy" decoding="async">\n'
     f'      <div class="ep-arrow">↗</div>\n'
     f'      <div class="episode-info">\n'
     f'        <div class="ep-label">Episode {ep}</div>\n'
     f'        <div class="ep-title">{title}</div>\n'
-    f'        <div class="ep-meta">{count} photographs<span class="ep-location">{location}</span><span class="ep-location">{today}</span></div>\n'
+    f'        <div class="ep-meta">{count} photographs<span class="ep-location">{location}</span><span class="ep-location"><time datetime="{today_iso}">{today}</time></span></div>\n'
     f'      </div>\n'
     f'    </a>\n\n'
 )
