@@ -6,12 +6,18 @@
   <meta name="theme-color" content="#0e0d0c">
   <title>Justin Fu — Ricoh GR IV</title>
   <meta name="description" content="Street and travel photography shot on Ricoh GR IV by Justin Fu.">
-  <link rel="canonical" href="https://justinfu.com/ricoh.html">
+  <meta name="author" content="Justin Fu">
+  <link rel="alternate" type="application/atom+xml" title="Justin Fu" href="/feed.xml">
+  <link rel="canonical" href="https://justinfu.com/ricoh">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Justin Fu — Ricoh GR IV">
   <meta property="og:description" content="Street and travel photography shot on Ricoh GR IV by Justin Fu.">
-  <meta property="og:url" content="https://justinfu.com/ricoh.html">
+  <meta property="og:url" content="https://justinfu.com/ricoh">
   <meta property="og:image" content="https://justinfu.com/images/cover-ricoh.jpg">
+  <meta property="og:image:width" content="800">
+  <meta property="og:image:height" content="533">
+  <meta property="article:published_time" content="2026-05-06">
+  <meta property="article:author" content="Justin Fu">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Justin Fu — Ricoh GR IV">
   <meta name="twitter:description" content="Street and travel photography shot on Ricoh GR IV by Justin Fu.">
@@ -24,19 +30,50 @@
   <link rel="stylesheet" href="gallery.css">
   <script defer src="/_vercel/insights/script.js"></script>
   <script defer src="/_vercel/speed-insights/script.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ImageGallery",
+    "name": "Ricoh GR IV",
+    "description": "Street and travel photography shot on Ricoh GR IV by Justin Fu.",
+    "url": "https://justinfu.com/ricoh",
+    "datePublished": "2026-05-06",
+    "creator": { "@type": "Person", "name": "Justin Fu", "url": "https://justinfu.com/" },
+    "image": [
+      "https://justinfu.com/images/ricoh/golden-gate.jpg",
+      "https://justinfu.com/images/ricoh/lacma-stairs.jpg",
+      "https://justinfu.com/images/ricoh/beach-boardwalk.jpg",
+      "https://justinfu.com/images/ricoh/tree-canopy.jpg",
+      "https://justinfu.com/images/ricoh/sf-coastal-path.jpg",
+      "https://justinfu.com/images/ricoh/getty-rotunda.jpg",
+      "https://justinfu.com/images/ricoh/griffith-monument.jpg",
+      "https://justinfu.com/images/ricoh/la-bridge.jpg",
+      "https://justinfu.com/images/ricoh/getty-garden.jpg",
+      "https://justinfu.com/images/ricoh/getty-triangle.jpg",
+      "https://justinfu.com/images/ricoh/beach-skater.jpg",
+      "https://justinfu.com/images/ricoh/samsung-cameras.jpg",
+      "https://justinfu.com/images/ricoh/getty-hummingbird.jpg",
+      "https://justinfu.com/images/ricoh/getty-spiral.jpg",
+      "https://justinfu.com/images/ricoh/coffee-hands.jpg",
+      "https://justinfu.com/images/ricoh/car-wiper.jpg"
+    ]
+  }
+  </script>
 </head>
 <body>
   <header>
-    <a class="back" href="index.html">← all episodes</a>
+    <a class="back" href="/">← all episodes</a>
     <div class="divider"></div>
     <div class="ep-label">Episode 02</div>
-    <div class="ep-title">Ricoh GR IV</div>
+    <h1 class="ep-title">Ricoh GR IV</h1>
     <div class="ep-count">16 photographs</div>
   </header>
 
-  <div class="gallery-wrap">
-    <div class="masonry" id="gallery"></div>
-  </div>
+  <main>
+    <article class="gallery-wrap">
+      <div class="masonry" id="gallery"></div>
+    </article>
+  </main>
 
   <div id="lightbox">
     <span class="lb-close" onclick="closeLB()">close ✕</span>
@@ -46,20 +83,42 @@
     <div class="lb-counter" id="lb-counter"></div>
   </div>
 
+  <nav class="ep-nav">
+    <a href="/coffee">← Episode 01: Coffee</a>
+    <a href="/suno">Episode 03: Buddhist EDM →</a>
+  </nav>
+
   <footer>
-    <span><a href="index.html" style="color:inherit;text-decoration:none;">justinfu.com</a></span>
+    <span><a href="/" style="color:inherit;text-decoration:none;">justinfu.com</a></span>
     <span>made with ricoh gr iv</span>
   </footer>
 
   <script>
-    var photos = ["images/ricoh/golden-gate.jpg", "images/ricoh/lacma-stairs.jpg", "images/ricoh/beach-boardwalk.jpg", "images/ricoh/tree-canopy.jpg", "images/ricoh/sf-coastal-path.jpg", "images/ricoh/getty-rotunda.jpg", "images/ricoh/griffith-monument.jpg", "images/ricoh/la-bridge.jpg", "images/ricoh/getty-garden.jpg", "images/ricoh/getty-triangle.jpg", "images/ricoh/beach-skater.jpg", "images/ricoh/samsung-cameras.jpg", "images/ricoh/getty-hummingbird.jpg", "images/ricoh/getty-spiral.jpg", "images/ricoh/coffee-hands.jpg", "images/ricoh/car-wiper.jpg"];
+    var photos = [
+      { src: "images/ricoh/golden-gate.jpg", alt: "Golden Gate Bridge from a distance", w: 1600, h: 1067 },
+      { src: "images/ricoh/lacma-stairs.jpg", alt: "LACMA museum stairs, Los Angeles", w: 1600, h: 1067 },
+      { src: "images/ricoh/beach-boardwalk.jpg", alt: "Beach boardwalk, southern California", w: 1600, h: 1067 },
+      { src: "images/ricoh/tree-canopy.jpg", alt: "Looking up into a tree canopy", w: 1067, h: 1600 },
+      { src: "images/ricoh/sf-coastal-path.jpg", alt: "San Francisco coastal path", w: 1600, h: 1067 },
+      { src: "images/ricoh/getty-rotunda.jpg", alt: "Getty Center rotunda interior", w: 1600, h: 1067 },
+      { src: "images/ricoh/griffith-monument.jpg", alt: "Griffith Observatory monument", w: 1138, h: 1512 },
+      { src: "images/ricoh/la-bridge.jpg", alt: "Los Angeles bridge at golden hour", w: 1522, h: 1147 },
+      { src: "images/ricoh/getty-garden.jpg", alt: "Getty Center garden", w: 1587, h: 871 },
+      { src: "images/ricoh/getty-triangle.jpg", alt: "Triangular composition at the Getty Center", w: 1600, h: 1067 },
+      { src: "images/ricoh/beach-skater.jpg", alt: "Black-and-white skater on a beach boardwalk", w: 750, h: 390 },
+      { src: "images/ricoh/samsung-cameras.jpg", alt: "Display of Samsung cameras", w: 1600, h: 1067 },
+      { src: "images/ricoh/getty-hummingbird.jpg", alt: "Hummingbird at the Getty Center", w: 1600, h: 834 },
+      { src: "images/ricoh/getty-spiral.jpg", alt: "Spiral staircase at the Getty Center", w: 1600, h: 1067 },
+      { src: "images/ricoh/coffee-hands.jpg", alt: "Hands around a coffee cup", w: 890, h: 737 },
+      { src: "images/ricoh/car-wiper.jpg", alt: "Windshield wiper on a parked car", w: 1600, h: 908 }
+    ];
     var current = 0;
     var gallery = document.getElementById('gallery');
-    photos.forEach(function(src, i) {
+    photos.forEach(function(p, i) {
       var item = document.createElement('div');
       item.className = 'photo-item';
       var img = document.createElement('img');
-      img.src = src; img.alt = 'Photograph ' + (i+1); img.loading = 'lazy';
+      img.src = p.src; img.alt = p.alt; img.width = p.w; img.height = p.h; img.loading = 'lazy';
       img.onload = function() { this.classList.add('loaded'); };
       item.appendChild(img);
       item.addEventListener('click', function() { openLB(i); });
@@ -69,18 +128,18 @@
     var lbImg = document.getElementById('lb-img');
     var lbCounter = document.getElementById('lb-counter');
     function openLB(i) {
-      current = i; lbImg.src = photos[i];
-      if (photos[i+1]) new Image().src = photos[i+1];
-      if (photos[i-1]) new Image().src = photos[i-1];
+      current = i; lbImg.src = photos[i].src; lbImg.alt = photos[i].alt;
+      if (photos[i+1]) new Image().src = photos[i+1].src;
+      if (photos[i-1]) new Image().src = photos[i-1].src;
       lbCounter.textContent = (i+1) + ' / ' + photos.length;
       lb.classList.add('open'); document.body.style.overflow = 'hidden';
     }
     function closeLB() { lb.classList.remove('open'); document.body.style.overflow = ''; }
     function navLB(dir) {
       current = (current + dir + photos.length) % photos.length;
-      lbImg.src = photos[current];
-      if (photos[current+1]) new Image().src = photos[current+1];
-      if (photos[current-1]) new Image().src = photos[current-1];
+      lbImg.src = photos[current].src; lbImg.alt = photos[current].alt;
+      if (photos[current+1]) new Image().src = photos[current+1].src;
+      if (photos[current-1]) new Image().src = photos[current-1].src;
       lbCounter.textContent = (current+1) + ' / ' + photos.length;
     }
     lb.addEventListener('click', function(e) { if (e.target === lb) closeLB(); });

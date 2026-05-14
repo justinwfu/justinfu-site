@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Justin Fu</title>
+  <subtitle>A personal photo journal by Justin Fu.</subtitle>
+  <link href="https://justinfu.com/feed.xml" rel="self"/>
+  <link href="https://justinfu.com/"/>
+  <updated>2026-05-13T00:00:00Z</updated>
+  <id>https://justinfu.com/</id>
+  <author>
+    <name>Justin Fu</name>
+    <uri>https://justinfu.com/</uri>
+  </author>
+
+  <entry>
+    <title>Ce jeu de cerfs-volants</title>
+    <link href="https://justinfu.com/kites"/>
+    <id>https://justinfu.com/kites</id>
+    <updated>2026-05-13T00:00:00Z</updated>
+    <published>2026-05-13T00:00:00Z</published>
+    <summary>Two videos that have been on loop.</summary>
+  </entry>
+
+  <entry>
+    <title>Sontag</title>
+    <link href="https://justinfu.com/sontag"/>
+    <id>https://justinfu.com/sontag</id>
+    <updated>2026-05-13T00:00:00Z</updated>
+    <published>2026-05-13T00:00:00Z</published>
+    <summary>An essay on photography, written while picking up a Ricoh GR IV.</summary>
+  </entry>
+
+  <entry>
+    <title>Baseball</title>
+    <link href="https://justinfu.com/baseball"/>
+    <id>https://justinfu.com/baseball</id>
+    <updated>2026-05-12T00:00:00Z</updated>
+    <published>2026-05-12T00:00:00Z</published>
+    <summary>Black and white photographs from Dodger Stadium.</summary>
+  </entry>
+
+  <entry>
+    <title>Screengram</title>
+    <link href="https://justinfu.com/screengram"/>
+    <id>https://justinfu.com/screengram</id>
+    <updated>2026-05-07T00:00:00Z</updated>
+    <published>2026-05-07T00:00:00Z</published>
+    <summary>An essay on photography, screens, and what Frontback was reaching for.</summary>
+  </entry>
+
+  <entry>
+    <title>Buddhist EDM</title>
+    <link href="https://justinfu.com/suno"/>
+    <id>https://justinfu.com/suno</id>
+    <updated>2026-05-07T00:00:00Z</updated>
+    <published>2026-05-07T00:00:00Z</published>
+    <summary>AI-generated EDM, made with Suno.</summary>
+  </entry>
+
+  <entry>
+    <title>Ricoh GR IV</title>
+    <link href="https://justinfu.com/ricoh"/>
+    <id>https://justinfu.com/ricoh</id>
+    <updated>2026-05-06T00:00:00Z</updated>
+    <published>2026-05-06T00:00:00Z</published>
+    <summary>Street and travel photography shot on Ricoh GR IV.</summary>
+  </entry>
+
+  <entry>
+    <title>Coffee</title>
+    <link href="https://justinfu.com/coffee"/>
+    <id>https://justinfu.com/coffee</id>
+    <updated>2026-05-05T00:00:00Z</updated>
+    <published>2026-05-05T00:00:00Z</published>
+    <summary>A specialty coffee photo journal.</summary>
+  </entry>
+</feed>

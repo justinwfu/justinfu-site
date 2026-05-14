@@ -6,12 +6,18 @@
   <meta name="theme-color" content="#0e0d0c">
   <title>Justin Fu — Coffee</title>
   <meta name="description" content="A specialty coffee photo journal by Justin Fu.">
-  <link rel="canonical" href="https://justinfu.com/coffee.html">
+  <meta name="author" content="Justin Fu">
+  <link rel="alternate" type="application/atom+xml" title="Justin Fu" href="/feed.xml">
+  <link rel="canonical" href="https://justinfu.com/coffee">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Justin Fu — Coffee">
   <meta property="og:description" content="A specialty coffee photo journal by Justin Fu.">
-  <meta property="og:url" content="https://justinfu.com/coffee.html">
+  <meta property="og:url" content="https://justinfu.com/coffee">
   <meta property="og:image" content="https://justinfu.com/images/cover-coffee.jpg">
+  <meta property="og:image:width" content="800">
+  <meta property="og:image:height" content="533">
+  <meta property="article:published_time" content="2026-05-05">
+  <meta property="article:author" content="Justin Fu">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Justin Fu — Coffee">
   <meta name="twitter:description" content="A specialty coffee photo journal by Justin Fu.">
@@ -24,19 +30,53 @@
   <link rel="stylesheet" href="gallery.css">
   <script defer src="/_vercel/insights/script.js"></script>
   <script defer src="/_vercel/speed-insights/script.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ImageGallery",
+    "name": "Coffee",
+    "description": "A specialty coffee photo journal by Justin Fu.",
+    "url": "https://justinfu.com/coffee",
+    "datePublished": "2026-05-05",
+    "creator": { "@type": "Person", "name": "Justin Fu", "url": "https://justinfu.com/" },
+    "image": [
+      "https://justinfu.com/images/coffee/glitch-trio.jpg",
+      "https://justinfu.com/images/coffee/geisha-pour.jpg",
+      "https://justinfu.com/images/coffee/bw-coffee-sign.jpg",
+      "https://justinfu.com/images/coffee/latte-tray.jpg",
+      "https://justinfu.com/images/coffee/coffee-omakase.jpg",
+      "https://justinfu.com/images/coffee/bw-blackcup.jpg",
+      "https://justinfu.com/images/coffee/simple-kaffa-duo.jpg",
+      "https://justinfu.com/images/coffee/lost-origin.jpg",
+      "https://justinfu.com/images/coffee/bw-slowbar.jpg",
+      "https://justinfu.com/images/coffee/compass-latte.jpg",
+      "https://justinfu.com/images/coffee/croissant-cafe.jpg",
+      "https://justinfu.com/images/coffee/koffee-mameya.jpg",
+      "https://justinfu.com/images/coffee/bw-hand-cup.jpg",
+      "https://justinfu.com/images/coffee/mame-latte.jpg",
+      "https://justinfu.com/images/coffee/simple-kaffa-geisha.jpg",
+      "https://justinfu.com/images/coffee/coffee-beach.jpg",
+      "https://justinfu.com/images/coffee/compass-street.jpg",
+      "https://justinfu.com/images/coffee/pourover-scale.jpg",
+      "https://justinfu.com/images/coffee/bw-playing-coffee.jpg"
+    ]
+  }
+  </script>
 </head>
 <body>
   <header>
-    <a class="back" href="index.html">← all episodes</a>
+    <a class="back" href="/">← all episodes</a>
     <div class="divider"></div>
     <div class="ep-label">Episode 01</div>
-    <div class="ep-title">Coffee</div>
+    <h1 class="ep-title">Coffee</h1>
     <div class="ep-count">19 photographs</div>
   </header>
 
-  <div class="gallery-wrap">
-    <div class="masonry" id="gallery"></div>
-  </div>
+  <main>
+    <article class="gallery-wrap">
+      <div class="masonry" id="gallery"></div>
+    </article>
+  </main>
 
   <div id="lightbox">
     <span class="lb-close" onclick="closeLB()">close ✕</span>
@@ -53,20 +93,45 @@
     <div class="map-label" id="map-label"></div>
   </div>
 
+  <nav class="ep-nav">
+    <span class="spacer"></span>
+    <a href="/ricoh">Episode 02: Ricoh GR IV →</a>
+  </nav>
+
   <footer>
-    <span><a href="index.html" style="color:inherit;text-decoration:none;">justinfu.com</a></span>
+    <span><a href="/" style="color:inherit;text-decoration:none;">justinfu.com</a></span>
     <span>made with coffee</span>
   </footer>
 
   <script>
-    var photos = ["images/coffee/glitch-trio.jpg", "images/coffee/geisha-pour.jpg", "images/coffee/bw-coffee-sign.jpg", "images/coffee/latte-tray.jpg", "images/coffee/coffee-omakase.jpg", "images/coffee/bw-blackcup.jpg", "images/coffee/simple-kaffa-duo.jpg", "images/coffee/lost-origin.jpg", "images/coffee/bw-slowbar.jpg", "images/coffee/compass-latte.jpg", "images/coffee/croissant-cafe.jpg", "images/coffee/koffee-mameya.jpg", "images/coffee/bw-hand-cup.jpg", "images/coffee/mame-latte.jpg", "images/coffee/simple-kaffa-geisha.jpg", "images/coffee/coffee-beach.jpg", "images/coffee/compass-street.jpg", "images/coffee/pourover-scale.jpg", "images/coffee/bw-playing-coffee.jpg"];
+    var photos = [
+      { src: "images/coffee/glitch-trio.jpg", alt: "Three glitched coffee portraits", w: 1600, h: 1200 },
+      { src: "images/coffee/geisha-pour.jpg", alt: "Pouring a geisha coffee at Simple Kaffa, Tainan", w: 1200, h: 1600 },
+      { src: "images/coffee/bw-coffee-sign.jpg", alt: "Coffee shop sign in black and white", w: 1600, h: 1067 },
+      { src: "images/coffee/latte-tray.jpg", alt: "Latte and pastries on a tray, San Francisco", w: 1600, h: 1200 },
+      { src: "images/coffee/coffee-omakase.jpg", alt: "Coffee omakase tasting flight, Tokyo", w: 1600, h: 1200 },
+      { src: "images/coffee/bw-blackcup.jpg", alt: "Black coffee cup on a counter, black and white", w: 1600, h: 1067 },
+      { src: "images/coffee/simple-kaffa-duo.jpg", alt: "Two coffees at Simple Kaffa, Taipei", w: 1200, h: 1600 },
+      { src: "images/coffee/lost-origin.jpg", alt: "Lost Origin cafe interior, Tokyo", w: 1600, h: 1200 },
+      { src: "images/coffee/bw-slowbar.jpg", alt: "Slow bar pour-over setup, black and white", w: 1600, h: 1067 },
+      { src: "images/coffee/compass-latte.jpg", alt: "Latte at Compass Coffee, Tokyo", w: 1200, h: 1600 },
+      { src: "images/coffee/croissant-cafe.jpg", alt: "Croissant on a saucer at a cafe", w: 1198, h: 1600 },
+      { src: "images/coffee/koffee-mameya.jpg", alt: "Espresso pour at Koffee Mameya, Tokyo", w: 1200, h: 1600 },
+      { src: "images/coffee/bw-hand-cup.jpg", alt: "Hand around a coffee cup, black and white", w: 1600, h: 1067 },
+      { src: "images/coffee/mame-latte.jpg", alt: "Latte at Mame Coffee, Tokyo", w: 1600, h: 1563 },
+      { src: "images/coffee/simple-kaffa-geisha.jpg", alt: "Geisha coffee glass at Simple Kaffa, Taipei", w: 1200, h: 1600 },
+      { src: "images/coffee/coffee-beach.jpg", alt: "Coffee at the beach", w: 1200, h: 1600 },
+      { src: "images/coffee/compass-street.jpg", alt: "Compass Coffee shopfront, Osaka", w: 1200, h: 1600 },
+      { src: "images/coffee/pourover-scale.jpg", alt: "Pour-over coffee on a scale", w: 1200, h: 1600 },
+      { src: "images/coffee/bw-playing-coffee.jpg", alt: "Playing with coffee, black and white", w: 1600, h: 1136 }
+    ];
     var current = 0;
     var gallery = document.getElementById('gallery');
-    photos.forEach(function(src, i) {
+    photos.forEach(function(p, i) {
       var item = document.createElement('div');
       item.className = 'photo-item';
       var img = document.createElement('img');
-      img.src = src; img.alt = 'Photograph ' + (i+1); img.loading = 'lazy';
+      img.src = p.src; img.alt = p.alt; img.width = p.w; img.height = p.h; img.loading = 'lazy';
       img.onload = function() { this.classList.add('loaded'); };
       item.appendChild(img);
       item.addEventListener('click', function() { openLB(i); });
@@ -76,18 +141,18 @@
     var lbImg = document.getElementById('lb-img');
     var lbCounter = document.getElementById('lb-counter');
     function openLB(i) {
-      current = i; lbImg.src = photos[i];
-      if (photos[i+1]) new Image().src = photos[i+1];
-      if (photos[i-1]) new Image().src = photos[i-1];
+      current = i; lbImg.src = photos[i].src; lbImg.alt = photos[i].alt;
+      if (photos[i+1]) new Image().src = photos[i+1].src;
+      if (photos[i-1]) new Image().src = photos[i-1].src;
       lbCounter.textContent = (i+1) + ' / ' + photos.length;
       lb.classList.add('open'); document.body.style.overflow = 'hidden'; updateMapBtn();
     }
     function closeLB() { lb.classList.remove('open'); document.body.style.overflow = ''; }
     function navLB(dir) {
       current = (current + dir + photos.length) % photos.length;
-      lbImg.src = photos[current];
-      if (photos[current+1]) new Image().src = photos[current+1];
-      if (photos[current-1]) new Image().src = photos[current-1];
+      lbImg.src = photos[current].src; lbImg.alt = photos[current].alt;
+      if (photos[current+1]) new Image().src = photos[current+1].src;
+      if (photos[current-1]) new Image().src = photos[current-1].src;
       lbCounter.textContent = (current+1) + ' / ' + photos.length;
       updateMapBtn();
     }
@@ -147,7 +212,7 @@
 };
 
     function updateMapBtn() {
-      var src = photos[current];
+      var src = photos[current].src;
       var btn = document.getElementById('lb-map-btn');
       btn.classList.add('visible');
       if (GPS[src]) {
@@ -160,7 +225,7 @@
     }
 
     function openMap() {
-      var src = photos[current];
+      var src = photos[current].src;
       var g = GPS[src];
       var overlay = document.getElementById('map-overlay');
       var container = document.getElementById('map-container');
